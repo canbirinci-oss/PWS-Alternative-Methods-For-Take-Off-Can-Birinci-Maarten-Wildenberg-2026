@@ -12,22 +12,33 @@ F_grav = 0          #gravitational force                newton
 
 #constants
 dt = 0.1                                          #change in time                          seconds
+
 #m = float(input("Give mass in kilograms"))         #mass of the object to be simulated      kilograms
-m = 1000
 G =  6.6743 * (10 ** -11)                            #Gravitational constant                  m^3/kg/s^2
 
 class Earth:
     m = 5.9722*10**24                               #mass of earth
     R = 6371000                                     #radius of earth
 
+class rocket:
+    m = 1000                                        #mass of rocket
+    C_D = 0.5                                       #drag coefficient of rocket
+    A = 1                                           #forward facing area of rocket
+
 #functions
-def F_grav_calc():
+def F_grav_calc():                                          #Gravitational force
     r = Earth.R + s
-    F_grav = -1 * (G * m * Earth.m / (r ** 2))
+    F_grav = -1 * (G * rocket.m * Earth.m / (r ** 2))
     return F_grav
 
-def E_kin_calc():
-    
+def E_kin_calc():                                           #Kinetic Energy
+    E_kin = 0.5 * rocket.m * (v**2)
+    return E_kin
+
+def F_D_calc():                                             #Drag
+    Density = 
+    F_D = 0.5 * Density * (v**2) * rocket.C_D * rocket.A
+    return F_D
 
 #simulation
 x = []
@@ -36,10 +47,13 @@ y = []
 for n in range(100):
     F_grav = F_grav_calc()
     F_res = F_grav
-    a = F_res / m
+    a = F_res / rocket.m
     v = v + a * dt
     s = s + v * dt
     t = t + dt
+
+    E_kin = E_kin_calc()
+
     x.append(t)
     if s >= 0:
         y.append(s)
